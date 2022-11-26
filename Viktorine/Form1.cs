@@ -34,7 +34,13 @@ namespace Viktorine
                 MessageBox.Show("Пользователь не найден!");
                 return;
             }
+            SingleTon.User = user;
+            Main main= new Main();
+            main.Show();
+            Hide();
 
         }
+
+        
     }
 }
