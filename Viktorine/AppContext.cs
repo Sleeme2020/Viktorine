@@ -10,9 +10,14 @@ namespace Viktorine
 {
     public class AppContext : DbContext
     {
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<VariableQuote> VariableQuotes { get; set; }
+        public DbSet<Victorine> Victorines { get; set; }
+        public DbSet<VictorineQuote> VictorineQuotes { get; set; }
         public DbSet<Quote> Quotes { get; set; }
 
-        public AppContext() => Database.EnsureCreated();
+        public AppContext() => Database.Migrate();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

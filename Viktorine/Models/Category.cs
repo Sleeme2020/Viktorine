@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace Viktorine.Models
 {
-    public class VariableQuote
+    public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsPrived { get; set; }
-        public Quote Quote { get; set; }
-        public int QuoteId { get; set; }
-
     }
 }
