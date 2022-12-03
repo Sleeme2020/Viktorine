@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -36,16 +35,13 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.victorineQuoteBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.variableQuoteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsPrived = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.victorineQuoteBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.variableQuoteBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // listBox1
@@ -64,6 +60,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(248, 23);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox1
             // 
@@ -102,14 +99,6 @@
             this.dataGridViewCheckBoxColumn1.HeaderText = "IsPrived";
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             // 
-            // victorineQuoteBindingSource
-            // 
-            this.victorineQuoteBindingSource.DataSource = typeof(Viktorine.Models.VictorineQuote);
-            // 
-            // variableQuoteBindingSource
-            // 
-            this.variableQuoteBindingSource.DataSource = typeof(Viktorine.Models.VariableQuote);
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(713, 390);
@@ -127,6 +116,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "Добавить новый";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Name
             // 
@@ -149,11 +139,22 @@
             this.button3.Text = "Сохранить";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(282, 11);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 7;
+            this.button4.Text = "Категория";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // EditViktorine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 451);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -164,8 +165,6 @@
             this.Name = "EditViktorine";
             this.Text = "EditViktorine";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.victorineQuoteBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.variableQuoteBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,8 +176,6 @@
         private ComboBox comboBox1;
         private TextBox textBox1;
         private DataGridView dataGridView1;
-        private BindingSource variableQuoteBindingSource;
-        private BindingSource victorineQuoteBindingSource;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
@@ -187,5 +184,6 @@
         private DataGridViewTextBoxColumn Name;
         private DataGridViewCheckBoxColumn IsPrived;
         private Button button3;
+        private Button button4;
     }
 }

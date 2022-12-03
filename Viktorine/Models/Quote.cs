@@ -14,5 +14,10 @@ namespace Viktorine.Models
         public Category Category { get; set; }
         public int CategoryId { get; set; }
 
+        public override string ToString()
+        {
+            return $"{Question} - {VariableQuotes.Count}";
+        }
+
     }
 }
