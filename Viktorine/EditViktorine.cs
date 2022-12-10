@@ -112,9 +112,13 @@ namespace Viktorine
             {
                 MessageBox.Show("Не выбрана категория");
                 return;
-            }                        
+            }
+            if (listBox1.SelectedItem== null)
+            {
+                MessageBox.Show("Не выбрана категория");
+                return;
+            }
 
-            
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 ///dataGridView1[1, i].Value
@@ -122,7 +126,8 @@ namespace Viktorine
                 {
                     if (dataGridView1[0, i].Value != null) {
 
-                        var varqoute = (comboBox1.SelectedItem as Quote).VariableQuotes.
+                        var q = (listBox1.SelectedItem as Quote);
+                        var varqoute = q.VariableQuotes.
                             Where(u => u.Id == (Convert.ToInt32(dataGridView1[0, i].Value)))
                             .FirstOrDefault();
                         varqoute.Name = dataGridView1[1, i].Value as string;
@@ -130,7 +135,7 @@ namespace Viktorine
                     }
                     else
                     {
-                        (comboBox1.SelectedItem as Quote).VariableQuotes.Add(
+                        (listBox1.SelectedItem as Quote).VariableQuotes.Add(
                             new()
                             {
                                 Quote = (comboBox1.SelectedItem as Quote),
@@ -150,7 +155,7 @@ namespace Viktorine
                     //});
             }
             
-            SingleTon.DB.Quotes.Add(comboBox1.SelectedItem as Quote);
+            SingleTon.DB.Quotes.Update(listBox1.SelectedItem as Quote);
             SingleTon.DB.SaveChanges();
             Clean();
             UpdQuotes();
@@ -158,7 +163,7 @@ namespace Viktorine
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems == null) return;
+            if (listBox1.SelectedItem == null) return;
             Clean();
             textBox1.Text = (listBox1.SelectedItem as Quote).Question;
             int i = 0;
@@ -174,9 +179,9 @@ namespace Viktorine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems == null) return;
-
-            SingleTon.DB.Remove(listBox1.SelectedItems);
+            if (listBox1.SelectedItem == null) return;
+            //var q = (listBox1.SelectedItem as Quote);
+            SingleTon.DB.Remove(listBox1.SelectedItem);
             SingleTon.DB.SaveChanges();
             Clean();
             UpdQuotes();

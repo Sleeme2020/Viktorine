@@ -34,6 +34,7 @@ namespace Viktorine
 
         public void updateView()
         {
+            listBox1.Items.Clear();
             UpdList();
             UpdReiting();
         }
@@ -72,6 +73,7 @@ namespace Viktorine
             SingleTon.Category = comboBox1.SelectedItem as Category;
             Victory victory = new();
             victory.ShowDialog();
+            updateView();
         }
     }
 }
