@@ -31,17 +31,27 @@ namespace Viktorine
         void UpdQuotes()
         {
             listBox1.Items.Clear();
-            SingleTon.DB.Quotes.Load();
+            SingleTon.DB.Quotes.Include(u=>u.VariableQuotes).Load();
             if(comboBox1.SelectedItem ==null)
             {
                 listBox1.Items.AddRange(SingleTon.DB.Quotes.ToArray());
                 return;
             }
+
+
+            var ar = SingleTon.DB.Quotes.
+                Include(u => u.VariableQuotes)
+                .Where(
+                    x => x.Category == comboBox1.SelectedItem
+                    ).ToArray();
             listBox1.Items.AddRange
-                (SingleTon.DB.Quotes.Where(
-                    x=>x.Category==comboBox1.SelectedItem 
-                    ).ToArray()
-                );
+                (ar);
+        }
+
+        void Clean()
+        {
+            textBox1.Text.Trim();
+            dataGridView1.Rows.Clear();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -80,6 +90,7 @@ namespace Viktorine
              for(int i=0;i<dataGridView1.RowCount;i++)
             {
                 ///dataGridView1[1, i].Value
+                if(dataGridView1[1, i].Value as string !=null)
                 ListVariable.Add(new()
                 {
                     Quote = quote,
@@ -90,7 +101,84 @@ namespace Viktorine
             }
              quote.VariableQuotes = ListVariable;
             SingleTon.DB.Quotes.Add(quote);
-            SingleTon.DB.SaveChangesAsync();
+            SingleTon.DB.SaveChanges();
+            Clean();
+            UpdQuotes();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Не выбрана категория");
+                return;
+            }                        
+
+            
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                ///dataGridView1[1, i].Value
+                if (dataGridView1[1, i].Value as string != null)
+                {
+                    if (dataGridView1[0, i].Value != null) {
+
+                        var varqoute = (comboBox1.SelectedItem as Quote).VariableQuotes.
+                            Where(u => u.Id == (Convert.ToInt32(dataGridView1[0, i].Value)))
+                            .FirstOrDefault();
+                        varqoute.Name = dataGridView1[1, i].Value as string;
+                        varqoute.IsPrived = Convert.ToBoolean(dataGridView1[2, i].Value);
+                    }
+                    else
+                    {
+                        (comboBox1.SelectedItem as Quote).VariableQuotes.Add(
+                            new()
+                            {
+                                Quote = (comboBox1.SelectedItem as Quote),
+                                Name = dataGridView1[1, i].Value as string,
+                                IsPrived = Convert.ToBoolean(dataGridView1[2, i].Value)
+
+                            }
+                            );
+                    }
+                }
+                    //ListVariable.Add(new()
+                    //{
+                    //    Quote = quote,
+                    //    Name = dataGridView1[1, i].Value as string,
+                    //    IsPrived = Convert.ToBoolean(dataGridView1[2, i].Value)
+
+                    //});
+            }
+            
+            SingleTon.DB.Quotes.Add(comboBox1.SelectedItem as Quote);
+            SingleTon.DB.SaveChanges();
+            Clean();
+            UpdQuotes();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItems == null) return;
+            Clean();
+            textBox1.Text = (listBox1.SelectedItem as Quote).Question;
+            int i = 0;
+            foreach(var varqoute in (listBox1.SelectedItem as Quote).VariableQuotes)
+            {                
+                dataGridView1.Rows.Add();
+                dataGridView1[0, i].Value = varqoute.Id;
+                dataGridView1[1, i].Value = varqoute.Name;
+                dataGridView1[2, i].Value = varqoute.IsPrived;
+                i++;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItems == null) return;
+
+            SingleTon.DB.Remove(listBox1.SelectedItems);
+            SingleTon.DB.SaveChanges();
+            Clean();
             UpdQuotes();
         }
     }

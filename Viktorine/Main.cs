@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Viktorine.Models;
 
 namespace Viktorine
 {
@@ -17,8 +18,14 @@ namespace Viktorine
         {
             InitializeComponent();
             updateView();
+            UpdCategory();
         }
-
+        void UpdCategory()
+        {
+            comboBox1.Items.Clear();
+            SingleTon.DB.Categories.Load();
+            comboBox1.Items.AddRange(SingleTon.DB.Categories.ToArray());
+        }
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
@@ -52,6 +59,19 @@ namespace Viktorine
         {
             EditViktorine viktorine = new EditViktorine();
             viktorine.ShowDialog();
+            UpdCategory();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Не выбрана категория");
+                return;
+            }
+            SingleTon.Category = comboBox1.SelectedItem as Category;
+            Victory victory = new();
+            victory.ShowDialog();
         }
     }
 }

@@ -35,6 +35,7 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.button2 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // listBox1
@@ -48,17 +49,18 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(286, 12);
+            this.button1.Location = new System.Drawing.Point(271, 46);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 47);
+            this.button1.Size = new System.Drawing.Size(117, 47);
             this.button1.TabIndex = 1;
             this.button1.Text = "Начать Викторину";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(286, 80);
+            this.label1.Location = new System.Drawing.Point(286, 114);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 15);
             this.label1.TabIndex = 2;
@@ -67,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(286, 135);
+            this.label2.Location = new System.Drawing.Point(286, 169);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 15);
             this.label2.TabIndex = 3;
@@ -77,7 +79,7 @@
             // 
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.linkLabel1.Location = new System.Drawing.Point(286, 104);
+            this.linkLabel1.Location = new System.Drawing.Point(286, 138);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(19, 21);
             this.linkLabel1.TabIndex = 4;
@@ -88,7 +90,7 @@
             // 
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.linkLabel2.Location = new System.Drawing.Point(286, 164);
+            this.linkLabel2.Location = new System.Drawing.Point(286, 198);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(34, 21);
             this.linkLabel2.TabIndex = 5;
@@ -105,11 +107,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(271, 12);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.TabIndex = 7;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 488);
+            this.ClientSize = new System.Drawing.Size(400, 488);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
@@ -134,5 +145,6 @@
         private LinkLabel linkLabel1;
         private LinkLabel linkLabel2;
         private Button button2;
+        private ComboBox comboBox1;
     }
 }

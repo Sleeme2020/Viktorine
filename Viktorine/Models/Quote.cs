@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Viktorine.Models
-{
+{    
     public class Quote
     {
         public int Id { get; set; }
