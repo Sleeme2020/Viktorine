@@ -174,9 +174,9 @@ namespace Viktorine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems == null) return;
-
-            SingleTon.DB.Remove(listBox1.SelectedItems);
+            if (listBox1.SelectedItem == null) return;
+            //var q = (listBox1.SelectedItem as Quote);
+            SingleTon.DB.Remove(listBox1.SelectedItem);
             SingleTon.DB.SaveChanges();
             Clean();
             UpdQuotes();
